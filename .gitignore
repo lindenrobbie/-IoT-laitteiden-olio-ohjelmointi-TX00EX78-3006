@@ -1,0 +1,9 @@
+# ide
+.idea/
+.vscode/
+
+# build artifacts
+*.exe
+*.o
+*.out
+cmake-build-*/
