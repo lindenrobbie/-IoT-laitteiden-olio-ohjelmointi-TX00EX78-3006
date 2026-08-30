@@ -98,4 +98,4 @@ int main(void)
 //// then used .str() to get one massive std::string
 
 // changed this^^^^ absolutely horrible method
-// now just using while loop and getline + \n
+// now just using while loop and getline + \ni
