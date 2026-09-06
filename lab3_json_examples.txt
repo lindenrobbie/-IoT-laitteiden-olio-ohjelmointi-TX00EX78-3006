@@ -1,0 +1,5 @@
+{ "Name":"Bag of poop", "Weight":300000, "Price":15.00, "Discount":50 }
+{ "Name":"Diced chicken", "Weight":350, "Price":5.30, "Discount":0 }
+{ "Name":"Whole grain bread", "Weight":500, "Price":2.50, "Discount":0 }
+{ "Name":"Long grain rice", "Weight":1000, "Price":3.00, "Discount":10 }
+
