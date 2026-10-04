@@ -1,0 +1,62 @@
+#include <iostream>
+#include <type_traits>
+#include <cstdint>
+#include <string>
+
+// g++ -std=c++17 lab11_1.cpp -o lab11
+// ./lab11
+
+// Required function template: accepts different types using T.
+template <typename T>
+void print_hex(T value)
+{
+    // Check at compile time whether T is an integer type.
+    if constexpr (std::is_integral<T>::value)
+    {
+        // Unsigned form lets us also print the bits of negative integers.
+        std::uintmax_t number = static_cast<std::uintmax_t>(value);
+        const char *hex_digits = "0123456789abcdef";
+
+        // Required width: exactly two hex digits per byte, including zeros.
+        // Each hex digit is 4 bits. Print from the highest digit to the lowest.
+        for (int i = sizeof(T) * 2 - 1; i >= 0; --i)
+        {
+            std::cout << hex_digits[(number >> (i * 4)) & 0xF];
+        }
+    }
+    else
+    {
+        // Required output for every non-integer type.
+        std::cout << "[noint]";
+    }
+
+    std::cout << '\n';
+}
+
+int main()
+{
+    // Required tests: different integer types.
+    unsigned char byte = 42;
+    short small = 42;
+    int normal = 42;
+    long long large = 42;
+    signed char negative_byte = -1;
+    int negative = -42;
+    bool boolean = true;
+
+    print_hex(byte);
+    print_hex(small);
+    print_hex(normal);
+    print_hex(large);
+    print_hex(negative_byte);
+    print_hex(negative);
+    print_hex(boolean);
+
+    // Required tests: different non-integer types.
+    print_hex(3.14f);
+    print_hex(3.14);
+    print_hex(std::string("hello"));
+    print_hex("hello");
+
+    return 0;
+}
