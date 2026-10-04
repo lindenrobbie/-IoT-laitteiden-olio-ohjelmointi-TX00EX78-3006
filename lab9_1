@@ -1,0 +1,68 @@
+#include <iostream>
+#include <string>
+#include <map>
+#include <utility>
+#include <iomanip>
+
+// g++ -std=c++11 lab9_1.cpp -o lab9
+// ./lab9
+
+int main()
+{
+    // Required map: course name -> pair of credits and grade.
+    std::map<std::string, std::pair<int, int>> courses;
+    std::string name;
+
+    while (true)
+    {
+        // Ask for a course name, "stop" or "print". Names can contain spaces.
+        std::cout << "Enter name or \"stop\" or \"print\": ";
+        std::getline(std::cin >> std::ws, name);
+
+        // Stop the program when the user enters "stop".
+        if (name == "stop")
+        {
+            break;
+        }
+        else if (name == "print")
+        {
+            int total_credits = 0;
+            int weighted_sum = 0;
+
+            // Required range-for: go through the map and print each course.
+            // course.first = name, course.second = pair of credits and grade.
+            for (const auto &course : courses)
+            {
+                int credits = course.second.first;
+                int grade = course.second.second;
+
+                std::cout << course.first << " (" << credits << " cr): "
+                          << grade << '\n';
+
+                total_credits += credits;
+                weighted_sum += credits * grade;
+            }
+
+            // Required weighted GPA: sum of (credits * grade) / total credits.
+            double gpa = static_cast<double>(weighted_sum) / total_credits;
+            std::cout << "GPA: " << std::fixed << std::setprecision(2)
+                      << gpa << '\n';
+        }
+        else
+        {
+            // Ask for the course's credits and grade, as shown in the example.
+            int credits;
+            int grade;
+
+            std::cout << "Enter Credits: ";
+            std::cin >> credits;
+            std::cout << "Enter Grade: ";
+            std::cin >> grade;
+
+            // Use the name as the key. Reusing a name updates that course.
+            courses[name] = {credits, grade};
+        }
+    }
+
+    return 0;
+}
